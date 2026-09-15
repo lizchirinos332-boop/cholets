@@ -1,0 +1,456 @@
+/* ==============================================================
+   DATA-CHOLETS — estilos
+   Paleta y patrones inspirados en la arquitectura de los cholets
+   de El Alto (fachadas geométricas de colores vivos).
+   ============================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+  --noche: #14141c;
+  --panel: #1b1b26;
+  --panel-borde: rgba(245, 241, 232, 0.12);
+  --tinta: #f2eee3;
+  --tinta-tenue: rgba(242, 238, 227, 0.62);
+
+  --magenta: #e63888;
+  --oro: #f5b700;
+  --turquesa: #14b8ac;
+  --naranja: #f2542d;
+  --glow: #6be8db;
+
+  --radio: 10px;
+  --fuente-titulo: 'Space Grotesk', sans-serif;
+  --fuente-cuerpo: 'IBM Plex Sans', sans-serif;
+  --fuente-dato: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at 15% -10%, rgba(230, 56, 136, 0.16), transparent 45%),
+    radial-gradient(circle at 100% 0%, rgba(20, 184, 172, 0.14), transparent 40%),
+    var(--noche);
+  color: var(--tinta);
+  font-family: var(--fuente-cuerpo);
+  line-height: 1.5;
+}
+
+h1, h2, h3 { font-family: var(--fuente-titulo); margin: 0; }
+button, input, textarea { font-family: inherit; }
+a { color: var(--glow); }
+
+:focus-visible {
+  outline: 2px solid var(--glow);
+  outline-offset: 2px;
+}
+
+/* ---------- HEADER ---------- */
+.header-principal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px 6vw;
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(90deg, var(--magenta), var(--oro), var(--turquesa), var(--naranja)) 1;
+  flex-wrap: wrap;
+}
+
+.header-marca { display: flex; align-items: center; gap: 16px; }
+
+/* Icono: pequeño "facade" geométrico tipo cholet */
+.header-icono {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  background:
+    repeating-linear-gradient(45deg,
+      var(--magenta) 0 8px,
+      var(--oro) 8px 16px,
+      var(--turquesa) 16px 24px,
+      var(--naranja) 24px 32px);
+  box-shadow: 0 0 0 2px var(--noche), 0 0 18px rgba(107, 232, 219, 0.35);
+}
+
+.header-principal h1 { font-size: 1.6rem; letter-spacing: -0.01em; }
+.header-principal p { margin: 4px 0 0; color: var(--tinta-tenue); font-size: 0.92rem; }
+
+.estado-chip {
+  font-family: var(--fuente-dato);
+  font-size: 0.82rem;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--panel-borde);
+  background: rgba(107, 232, 219, 0.08);
+  color: var(--glow);
+  white-space: nowrap;
+}
+
+/* ---------- LAYOUT ---------- */
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 6vw 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-borde);
+  border-radius: var(--radio);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* franja decorativa superior tipo textil andino */
+.panel::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(90deg,
+    var(--magenta) 0 18px,
+    var(--oro) 18px 36px,
+    var(--turquesa) 36px 54px,
+    var(--naranja) 54px 72px);
+  opacity: 0.85;
+}
+
+.panel-titulo h2 { font-size: 1.25rem; }
+.panel-titulo p { margin: 6px 0 20px; color: var(--tinta-tenue); font-size: 0.92rem; max-width: 60ch; }
+
+/* ---------- FORMULARIO ---------- */
+#formCholet {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+}
+
+.campo { display: flex; flex-direction: column; gap: 6px; }
+.campo-ancho { grid-column: 1 / -1; }
+
+label { font-size: 0.85rem; color: var(--tinta-tenue); }
+
+input, textarea {
+  background: rgba(20, 20, 28, 0.6);
+  border: 1px solid var(--panel-borde);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--tinta);
+  font-size: 0.95rem;
+}
+
+input:focus, textarea:focus { border-color: var(--turquesa); }
+textarea { resize: vertical; }
+
+.boton {
+  border: none;
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.boton:hover { filter: brightness(1.08); }
+.boton:active { transform: translateY(1px); }
+
+.boton-primario {
+  grid-column: 1 / -1;
+  justify-self: start;
+  background: linear-gradient(135deg, var(--turquesa), var(--glow));
+  color: #0c1a18;
+}
+
+.boton-secundario {
+  background: rgba(245, 241, 232, 0.08);
+  color: var(--tinta);
+  border: 1px solid var(--panel-borde);
+}
+
+.mensaje { margin: 14px 0 0; font-size: 0.9rem; min-height: 1.2em; color: var(--glow); }
+.mensaje.error { color: var(--naranja); }
+
+/* ---------- EDIFICIO + SENSORES ---------- */
+.panel-doble {
+  display: grid;
+  grid-template-columns: 1.1fr 1.4fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.controles-pisos { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+
+.controles-pisos button {
+  background: rgba(245, 241, 232, 0.06);
+  border: 1px solid var(--panel-borde);
+  color: var(--tinta);
+  border-radius: 7px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.controles-pisos button.activo {
+  background: var(--turquesa);
+  color: #0c1a18;
+  border-color: var(--turquesa);
+}
+
+/* El edificio: fachada real de un cholet como fondo, con los pisos
+   como paneles translúcidos superpuestos (efecto "planos de sensores") */
+.cholet {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  perspective: 1200px;
+  position: relative;
+  padding: 14px;
+  border-radius: 14px;
+  background-image:
+    linear-gradient(180deg, rgba(20, 20, 28, 0.35) 0%, rgba(20, 20, 28, 0.55) 100%),
+    url('../img/cholet-fachada.png');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid var(--panel-borde);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.piso {
+  border-radius: 8px;
+  padding: 18px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border: 1px solid rgba(245, 241, 232, 0.25);
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.3s ease;
+  color: var(--tinta);
+  position: relative;
+  isolation: isolate;
+  background: rgba(20, 20, 28, 0.42);
+  backdrop-filter: blur(3px) saturate(1.1);
+  -webkit-backdrop-filter: blur(3px) saturate(1.1);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
+}
+
+/* franja de color de acento a la izquierda, en vez de rellenar todo el bloque */
+.piso::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  border-radius: 8px 0 0 8px;
+}
+
+/* patrón geométrico sutil sobre cada piso, como las fachadas de Freddy Mamani */
+.piso::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.10) 0 6px, transparent 6px 26px);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.piso h3 { font-size: 1rem; z-index: 1; }
+.piso-uso { font-size: 0.78rem; opacity: 0.9; z-index: 1; }
+
+.piso-1::before { background: var(--turquesa); }
+.piso-2::before { background: var(--oro); }
+.piso-3::before { background: var(--naranja); }
+.piso-4::before { background: var(--magenta); }
+
+.piso:hover {
+  transform: translateY(-2px);
+  background: rgba(20, 20, 28, 0.6);
+}
+
+.piso.expandido {
+  transform: rotateX(6deg) rotateY(-6deg) translateZ(24px) scale(1.03);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.5);
+  background: rgba(20, 20, 28, 0.68);
+}
+
+.flujo-datos {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-family: var(--fuente-dato);
+  font-size: 0.78rem;
+  color: var(--tinta-tenue);
+}
+
+.flujo-linea {
+  width: 26px;
+  height: 1px;
+  background: var(--panel-borde);
+}
+
+.sensores-columna { min-height: 260px; }
+
+.lista-sensores {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sensor {
+  background: rgba(245, 241, 232, 0.04);
+  border: 1px solid var(--panel-borde);
+  border-radius: 8px;
+  padding: 14px 16px;
+  transition: border-color 0.3s ease;
+}
+
+.sensor h3 { font-size: 0.95rem; margin-bottom: 6px; }
+
+.sensor-linea {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--tinta-tenue);
+  margin-top: 3px;
+}
+
+.sensor-valor {
+  font-family: var(--fuente-dato);
+  color: var(--tinta);
+}
+
+.sensor.estado-alerta { border-color: var(--naranja); }
+.sensor.estado-alerta .sensor-valor { color: var(--naranja); }
+
+.sensor-vacio { color: var(--tinta-tenue); font-size: 0.9rem; grid-column: 1 / -1; }
+
+/* ---------- MULTIMEDIA ---------- */
+.multimedia-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.multimedia-bloque { display: flex; flex-direction: column; }
+
+video {
+  width: 100%;
+  border-radius: 8px;
+  background: #000;
+  display: block;
+}
+
+.audio-visual {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 64px;
+  padding: 0 4px;
+  background: rgba(245, 241, 232, 0.04);
+  border: 1px solid var(--panel-borde);
+  border-radius: 8px;
+}
+
+.audio-visual span {
+  flex: 1;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--glow), var(--turquesa));
+  height: 30%;
+  animation: pulso 1.4s ease-in-out infinite;
+}
+
+.audio-visual span:nth-child(2n) { animation-delay: 0.2s; height: 55%; }
+.audio-visual span:nth-child(3n) { animation-delay: 0.4s; height: 40%; }
+.audio-visual span:nth-child(4n) { animation-delay: 0.6s; height: 70%; }
+
+@keyframes pulso {
+  0%, 100% { transform: scaleY(0.6); opacity: 0.6; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+.multimedia-controles {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+/* ---------- SIMULACIÓN ---------- */
+.simulacion-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.contador-bloque {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--fuente-dato);
+}
+
+.contador-numero {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--glow);
+}
+
+.contador-etiqueta { font-size: 0.78rem; color: var(--tinta-tenue); }
+
+.simulacion-controles { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.bitacora {
+  margin-top: 22px;
+  border-top: 1px solid var(--panel-borde);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 160px;
+  overflow-y: auto;
+  font-family: var(--fuente-dato);
+  font-size: 0.8rem;
+  color: var(--tinta-tenue);
+}
+
+.bitacora-linea { margin: 0; }
+.bitacora-linea span { color: var(--tinta-tenue); opacity: 0.6; margin-right: 8px; }
+.bitacora-linea.alerta { color: var(--naranja); }
+
+/* ---------- FOOTER ---------- */
+.pie {
+  text-align: center;
+  padding: 24px;
+  color: var(--tinta-tenue);
+  font-size: 0.82rem;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 860px) {
+  .panel-doble { grid-template-columns: 1fr; }
+  #formCholet { grid-template-columns: 1fr; }
+  .boton-primario { justify-self: stretch; }
+  .lista-sensores { grid-template-columns: 1fr; }
+  .multimedia-grid { grid-template-columns: 1fr; }
+  .header-principal { padding: 24px 5vw; }
+  main { padding: 32px 5vw 60px; }
+}

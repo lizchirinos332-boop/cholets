@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data-Cholets — Simulador IoT</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="header-principal">
+        <div class="header-marca">
+            <span class="header-icono" aria-hidden="true"></span>
+            <div>
+                <h1>Data-Cholets</h1>
+                <p>El Internet de las Cosas aplicado a edificios inteligentes</p>
+            </div>
+        </div>
+        <span class="estado-chip" id="estadoSistema">Sistema en espera</span>
+    </header>
+
+    <main>
+
+        <!-- REGISTRO -->
+        <section class="panel" id="registro">
+            <div class="panel-titulo">
+                <h2>Registrar Cholet</h2>
+                <p>Ingresa los datos del propietario y del edificio antes de comenzar la simulación.</p>
+            </div>
+            <form id="formCholet">
+                <div class="campo">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" required>
+                </div>
+                <div class="campo">
+                    <label for="email">Correo</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="campo">
+                    <label for="nombreCholet">Nombre del Cholet</label>
+                    <input type="text" id="nombreCholet" required>
+                </div>
+                <div class="campo">
+                    <label for="piso">Piso principal</label>
+                    <input type="number" id="piso" min="1" required>
+                </div>
+                <div class="campo campo-ancho">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" minlength="10" rows="3"></textarea>
+                </div>
+                <button type="submit" class="boton boton-primario">Registrar</button>
+            </form>
+            <p class="mensaje" id="mensajeFormulario"></p>
+        </section>
+
+        <!-- EDIFICIO + SENSORES -->
+        <section class="panel panel-doble" id="edificio">
+            <div class="columna-edificio">
+                <div class="panel-titulo">
+                    <h2>Edificio Inteligente</h2>
+                    <p>Selecciona un piso para ver sus sensores IoT.</p>
+                </div>
+
+                <div class="controles-pisos" id="controles-pisos">
+                    <button data-piso="1">Piso 1</button>
+                    <button data-piso="2">Piso 2</button>
+                    <button data-piso="3">Piso 3</button>
+                    <button data-piso="4">Piso 4</button>
+                </div>
+
+                <div class="cholet" id="cholet">
+                    <div class="piso piso-4" data-piso="4">
+                        <h3>Piso 4</h3>
+                        <span class="piso-uso">Seguridad</span>
+                    </div>
+                    <div class="piso piso-3" data-piso="3">
+                        <h3>Piso 3</h3>
+                        <span class="piso-uso">Movimiento y cámaras</span>
+                    </div>
+                    <div class="piso piso-2" data-piso="2">
+                        <h3>Piso 2</h3>
+                        <span class="piso-uso">Energía y agua</span>
+                    </div>
+                    <div class="piso piso-1" data-piso="1">
+                        <h3>Piso 1</h3>
+                        <span class="piso-uso">Ambiental</span>
+                    </div>
+                </div>
+
+                <div class="flujo-datos" id="flujoDatos">
+                    <span>SENSOR</span><span class="flujo-linea"></span>
+                    <span>RED IoT</span><span class="flujo-linea"></span>
+                    <span>SERVIDOR</span><span class="flujo-linea"></span>
+                    <span>USUARIO</span>
+                </div>
+            </div>
+
+            <div class="columna-sensores sensores-columna">
+                <div class="panel-titulo">
+                    <h2>Sensores IoT</h2>
+                    <p>Datos en vivo de los dispositivos instalados en el cholet.</p>
+                </div>
+                <div class="lista-sensores" id="listaSensores"></div>
+            </div>
+        </section>
+
+        <!-- MULTIMEDIA -->
+        <section class="panel" id="multimedia">
+            <div class="panel-titulo">
+                <h2>Centro Multimedia</h2>
+                <p>Recorrido visual y ambiente sonoro del cholet inteligente.</p>
+            </div>
+            <div class="multimedia-grid">
+                <div class="multimedia-bloque">
+                    <video id="videoCholet" width="600" preload="metadata">
+                        <source src="multimedia/cholet.mp4" type="video/mp4">
+                        Su navegador no soporta video.
+                    </video>
+                    <div class="multimedia-controles">
+                        <button id="btnPlayVideo" class="boton boton-secundario">▶ Reproducir</button>
+                        <button id="btnPauseVideo" class="boton boton-secundario">⏸ Pausar</button>
+                        <button id="btnMuteVideo" class="boton boton-secundario">🔇 Silenciar</button>
+                    </div>
+                </div>
+
+                <div class="multimedia-bloque">
+                    <div class="audio-visual" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <audio id="audioCholet">
+                        <source src="multimedia/ambiente.mp3" type="audio/mpeg">
+                    </audio>
+                    <div class="multimedia-controles">
+                        <button id="btnPlayAudio" class="boton boton-secundario">▶ Reproducir audio</button>
+                        <button id="btnPauseAudio" class="boton boton-secundario">⏸ Pausar audio</button>
+                        <button id="btnMuteAudio" class="boton boton-secundario">🔇 Silenciar audio</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMULACIÓN -->
+        <section class="panel" id="simulacion">
+            <div class="panel-titulo">
+                <h2>Simulación IoT</h2>
+                <p>Inicia la simulación para actualizar sensores en tiempo real y generar alertas.</p>
+            </div>
+            <div class="simulacion-grid">
+                <div class="contador-bloque">
+                    <span class="contador-numero" id="segundos">0</span>
+                    <span class="contador-etiqueta">segundos activos</span>
+                </div>
+                <div class="simulacion-controles">
+                    <button id="btnIniciarSimulacion" class="boton boton-primario">Iniciar simulación</button>
+                    <button id="btnDetenerSimulacion" class="boton boton-secundario">Detener simulación</button>
+                </div>
+            </div>
+            <div class="bitacora" id="bitacora"></div>
+        </section>
+
+        <p class="pie">Data-Cholets · Proyecto académico UNIFRANZ · JavaScript funcionalidades avanzadas</p>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
